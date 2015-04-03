@@ -6,15 +6,22 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.xml.bind.JAXBException;
+
+import pl.marczykm.SecureChatServer.entity.User;
+import pl.marczykm.SecureChatServer.helper.JAXBHelper;
 
 /**
  * Hello world!
  *
  */
-public class App extends Thread {
+public class Server extends Thread {
 	private ServerSocket serverSocket;
 
-	public App(int port) throws IOException {
+	public Server(int port) throws IOException {
 		serverSocket = new ServerSocket(port);
 		serverSocket.setSoTimeout(10000);
 	}
@@ -32,12 +39,22 @@ public class App extends Thread {
 				System.out.println(in.readUTF());
 				DataOutputStream out = new DataOutputStream(
 						server.getOutputStream());
-				out.writeUTF("Thank you for connecting to "
-						+ server.getLocalSocketAddress() + "\nGoodbye!");
+				
+				User user = new User();
+				user.setUsername("marcin");
+				user.setPassword("siemka");
+				List<User> friends = new ArrayList<User>();
+				friends.add(new User("ania", "asd"));
+				user.setFriends(friends);
+				
+				out.writeUTF(JAXBHelper.generateString(user));
 				server.close();
 			} catch (SocketTimeoutException e) {
 				System.err.println("Socket timed out!");
 			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (JAXBException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -46,7 +63,7 @@ public class App extends Thread {
 	public static void main(String[] args) {
 		int port = Integer.parseInt(args[0]);
 		try {
-			Thread t = new App(port);
+			Thread t = new Server(port);
 			t.start();
 		} catch (IOException e) {
 			e.printStackTrace();
