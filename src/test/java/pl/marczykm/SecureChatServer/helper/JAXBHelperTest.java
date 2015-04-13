@@ -24,14 +24,13 @@ public class JAXBHelperTest {
 				+ "    </friends>\n"
 				+ "    <password>123</password>\n"
 				+ "    <username>User1</username>\n"
-				+ "</user>";
+				+ "</user>\n";
 		User user1 = new User("User1", "123");
 		User user2 = new User("User2", "456");
 		
 		user1.getFriends().add(user2);
 		
 		String generatedString = JAXBHelper.generateString(user1);
-		System.out.println(generatedString + "\n\n" + xmlContent);
 		
 		assertEquals(generatedString, xmlContent);
 	}
