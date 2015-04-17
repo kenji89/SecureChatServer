@@ -1,9 +1,4 @@
-pl\marczykm\SecureChatServer\dao\IMessageDao.class
 pl\marczykm\SecureChatServer\entity\Message.class
-pl\marczykm\SecureChatServer\service\UserService.class
-pl\marczykm\SecureChatServer\entity\User.class
-pl\marczykm\SecureChatServer\dao\IUserDao.class
-pl\marczykm\SecureChatServer\entity\Response.class
 pl\marczykm\SecureChatServer\Server.class
-pl\marczykm\SecureChatServer\service\IUserService.class
-pl\marczykm\SecureChatServer\dao\impl\UserDao.class
+pl\marczykm\SecureChatServer\helper\JAXBHelper.class
+pl\marczykm\SecureChatServer\entity\User.class
