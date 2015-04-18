@@ -1,11 +1,14 @@
 package pl.marczykm.SecureChatServer.dao.impl;
 
-import pl.marczykm.SecureChatServer.dao.IUserDao;
+import javax.persistence.Table;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
 import pl.marczykm.SecureChatServer.entity.User;
 
-public class UserDao implements IUserDao{
-	public User findUserBy(String username){
-		User user = new User(username, "dupa");
-		return user;
-	}
+@Repository
+@Table(name="Users")
+public interface UserDao extends JpaRepository<User, String>{
+	User findOneByUsername(String username);
 }

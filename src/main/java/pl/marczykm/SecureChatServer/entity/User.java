@@ -3,99 +3,48 @@ package pl.marczykm.SecureChatServer.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
-@XmlRootElement
+@Entity
+@Table(name = "Users")
 public class User {
-	
+	@Id
+	@GeneratedValue
+	private String id;
 	private String username;
-	private String password;
-	
+	private String hashedPassword;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "friends", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "friend_id") })
 	private List<User> friends;
-	
+
 	public User() {
 	}
-	
 
-	public User(String username, String password) {
+	public User(String username, String hashedPassword) {
 		super();
 		this.username = username;
-		this.password = password;
+		this.hashedPassword = hashedPassword;
 		friends = new ArrayList<User>();
 	}
-
 
 	public String getUsername() {
 		return username;
 	}
 
-	@XmlElement
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	@XmlElement
-	public void setPassword(String password) {
-		this.password = password;
+	public String getHashedPassword() {
+		return hashedPassword;
 	}
 
 	public List<User> getFriends() {
 		return friends;
 	}
 
-	@XmlElementWrapper(name="friends")
-	@XmlElement(name = "friend")
-	public void setFriends(List<User> friends) {
-		this.friends = friends;
-	}
-
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((friends == null) ? 0 : friends.hashCode());
-		result = prime * result
-				+ ((password == null) ? 0 : password.hashCode());
-		result = prime * result
-				+ ((username == null) ? 0 : username.hashCode());
-		return result;
-	}
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (friends == null) {
-			if (other.friends != null)
-				return false;
-		} else if (!friends.equals(other.friends))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		return true;
-	}
-	
-	
-	
 }

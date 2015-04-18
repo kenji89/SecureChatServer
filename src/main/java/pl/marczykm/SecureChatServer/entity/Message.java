@@ -5,7 +5,6 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
 public class Message {
 	private User sender;
 	private User receiver;
@@ -20,7 +19,6 @@ public class Message {
 		return sender;
 	}
 
-	@XmlElement
 	public void setSender(User sender) {
 		this.sender = sender;
 	}
@@ -29,7 +27,6 @@ public class Message {
 		return receiver;
 	}
 
-	@XmlElement
 	public void setReceiver(User receiver) {
 		this.receiver = receiver;
 	}
@@ -38,7 +35,6 @@ public class Message {
 		return content;
 	}
 
-	@XmlElement
 	public void setContent(String content) {
 		this.content = content;
 	}
@@ -47,7 +43,6 @@ public class Message {
 		return creationDate;
 	}
 
-	@XmlElement
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
@@ -56,7 +51,6 @@ public class Message {
 		return read;
 	}
 
-	@XmlElement
 	public void setRead(boolean read) {
 		this.read = read;
 	}
