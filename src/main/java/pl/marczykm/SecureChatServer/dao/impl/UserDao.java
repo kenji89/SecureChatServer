@@ -1,14 +1,9 @@
 package pl.marczykm.SecureChatServer.dao.impl;
 
-import javax.persistence.Table;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import pl.marczykm.SecureChatServer.entity.User;
 
-@Repository
-@Table(name="Users")
-public interface UserDao extends JpaRepository<User, String>{
+public interface UserDao extends MongoRepository<User, String>{
 	User findOneByUsername(String username);
 }
