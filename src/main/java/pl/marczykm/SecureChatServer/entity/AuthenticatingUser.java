@@ -13,10 +13,18 @@ public class AuthenticatingUser {
 		this.hashedPassword = hashedPassword;
 	}
 
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
 	public String getUsername() {
 		return username;
 	}
 
+	public void setHashedPassword(String hashedPassword) {
+		this.hashedPassword = hashedPassword;
+	}
+	
 	public String getHashedPassword() {
 		return hashedPassword;
 	}
